@@ -27,5 +27,5 @@ module.exports = {
   // 跳过问题
   skipQuestions: ['body', 'footer'],
   // subject⽂字⻓度默认是72
-  subjectLimit: 72
+  subjectLimit: 100
 }
