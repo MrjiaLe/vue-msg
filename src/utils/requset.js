@@ -10,7 +10,6 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(
   function (config) {
-    console.log(config)
     const token = store.getters.token
     if (token) {
       config.headers.token = token

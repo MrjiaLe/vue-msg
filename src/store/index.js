@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {},
   getters: {
-    token: (state) => state.user.token
+    token: (state) => state.user.token,
+    userInfo: (state) => state.user.userInfo
   },
   mutations: {},
   actions: {},
