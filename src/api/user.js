@@ -22,8 +22,16 @@ const login = (data) => {
   })
 }
 
+/**
+ * 获取用户权限
+ */
+const MenuNav = () => {
+  return request({ url: '/menu/nav', method: 'GET' })
+}
+
 export default {
   getCaptcha,
   login,
-  getUserInfo
+  getUserInfo,
+  MenuNav
 }

@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeLayout from '@/Layout'
+import users from './modules/users'
+import roles from './modules/roles'
+import menus from './modules/menus'
 
 Vue.use(VueRouter)
 
-const routes = [
+// 公有路由表
+export const publicRoutes = [
   {
     path: '/login',
     name: 'login',
@@ -12,59 +16,33 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Home',
-    redirect: '/welcome',
+    name: 'layout',
+    redirect: '/system',
     component: HomeLayout,
     children: [
       {
-        path: '/welcome',
-        name: 'welcome',
+        path: '/system',
+        name: 'system',
         component: () => import('@/views/sys/home'),
         meta: {
-          title: '控制台'
-        }
-      }
-    ]
-  },
-  {
-    path: '/sys',
-    name: 'sys',
-    redirect: '/sys/users',
-    component: HomeLayout,
-    meta: {
-      title: '系统管理'
-    },
-    children: [
-      {
-        path: '/sys/users',
-        name: 'users',
-        component: () => import('@/views/sys/users'),
-        meta: {
-          title: '用户管理'
+          title: '控制台',
+          icon: 'el-icon-s-home'
         }
       },
       {
-        path: '/sys/roles',
-        name: 'roles',
-        component: () => import('@/views/sys/roles'),
-        meta: {
-          title: '角色管理'
-        }
-      },
-      {
-        path: '/sys/menus',
-        name: 'menus',
-        component: () => import('@/views/sys/menus'),
-        meta: {
-          title: '菜单管理'
-        }
+        path: '/404',
+        name: '404',
+        component: () => import('@/views/404')
       }
     ]
   }
 ]
 
+// 私有路由表
+export const privateRoutes = [users, roles, menus]
+
 const router = new VueRouter({
-  routes
+  routes: publicRoutes
 })
 
 export default router

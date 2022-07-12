@@ -1,6 +1,29 @@
 <template>
   <div class="app-header">
-    <div>111</div>
+    <div class="tagview">
+      <i
+        @click="folding"
+        :class="
+          $store.state.user.collapse
+            ? 'el-icon-s-unfold scaling'
+            : 'el-icon-s-fold scaling'
+        "
+      ></i>
+      <div>
+        <el-tag
+          v-for="(item, i) in tags"
+          :key="i"
+          :closable="item.path !== '/system'"
+          class="el-Tagview"
+          effect="dark"
+          :type="$route.path === item.path ? 'warning' : 'info'"
+          @click="routingHop(item)"
+          @close="closeTag(item, i)"
+        >
+          {{ item.title }}
+        </el-tag>
+      </div>
+    </div>
     <div class="app-test">
       <el-avatar :size="40" :src="$store.getters.userInfo.avatar"></el-avatar>
       <el-dropdown @command="handleCommand">
@@ -18,8 +41,12 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   methods: {
+    folding() {
+      this.$store.commit('user/folding')
+    },
     handleCommand(command) {
       switch (command) {
         case 'setup':
@@ -52,12 +79,56 @@ export default {
             message: '已取消退出'
           })
         })
+    },
+
+    // tagview标签
+    ...mapMutations({
+      setTags: 'tagsView/setTags',
+      deleteTags: 'tagsView/deleteTags'
+    }),
+    routingHop(item) {
+      if (item.path === this.$route.path) return
+      this.$router.push(item.path)
+    },
+    closeTag(item, i) {
+      const tags = this.tags
+      if (item.path === this.$route.path) {
+        this.$router.push(tags[i - 1].path)
+      }
+      this.deleteTags(i)
+    }
+  },
+  computed: {
+    ...mapGetters(['tags'])
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        const {
+          path,
+          meta: { title }
+        } = val
+        this.setTags({ path, title })
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.el-Tagview {
+  margin-left: 15px;
+}
+.tagview {
+  display: flex;
+  align-items: center;
+}
+.scaling {
+  color: white;
+  font-size: 25px;
+}
 .app-header {
   width: 100%;
   height: 100%;

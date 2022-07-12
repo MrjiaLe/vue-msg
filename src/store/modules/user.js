@@ -5,7 +5,10 @@ export default {
   namespaced: true,
   state: {
     token: getItem('token') || '',
-    userInfo: getItem('userInfo') || {}
+    userInfo: getItem('userInfo') || {},
+    collapse: getItem('collapse') || false,
+    authoritys: [],
+    menus: []
   },
   mutations: {
     setToken(state, token) {
@@ -22,6 +25,14 @@ export default {
       state.userInfo = {}
       setItem('userInfo', {})
       router.push('/login')
+    },
+    folding(state) {
+      state.collapse = !state.collapse
+      setItem('collapse', state.collapse)
+    },
+    setNav(state, nav) {
+      state.menus = nav.menus
+      state.authoritys = nav.authoritys
     }
   },
   actions: {
@@ -30,9 +41,14 @@ export default {
       commit('setToken', token)
       return token
     },
-    async getInfo({ commit }) {
+    async userInfo({ commit }) {
       const res = await UserApi.getUserInfo()
       commit('setInfo', res)
+    },
+    async userNav({ commit }) {
+      const res = await UserApi.MenuNav()
+      commit('setNav', res)
+      return res
     }
   }
 }

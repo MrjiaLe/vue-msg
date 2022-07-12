@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     // 辅助函数
-    ...mapActions({ login: 'user/login', getInfo: 'user/getInfo' }),
+    ...mapActions({ login: 'user/login' }),
     // 表单验证登录
     handleLogin() {
       this.$refs.form.validate((valid) => {
@@ -94,7 +94,6 @@ export default {
         this.$notify({ title: '提示', message: '登录成功', type: 'success' })
         this.loadingStatus = true
         await this.$router.push('/')
-        await this.getInfo()
       } catch (error) {
         console.log(error)
       } finally {

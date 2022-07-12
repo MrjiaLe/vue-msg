@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-aside width="200px">
+    <el-aside :width="$store.state.user.collapse ? '64px' : '200px'">
       <app-aside></app-aside>
     </el-aside>
     <el-container>
