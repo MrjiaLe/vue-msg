@@ -21,6 +21,14 @@ export default {
     },
     deleteTags(state, i) {
       state.tags.splice(i, 1)
+    },
+    clear(state) {
+      state.tags = [
+        {
+          title: '控制台',
+          path: '/system'
+        }
+      ]
     }
   },
   actions: {}

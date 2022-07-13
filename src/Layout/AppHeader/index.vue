@@ -34,7 +34,7 @@
         content="关闭全部标签"
         placement="bottom"
       >
-        <i class="el-icon-rank tooltip"></i>
+        <i class="el-icon-rank tooltip" @click="clearTag"></i>
       </el-tooltip>
       <el-avatar :size="40" :src="$store.getters.userInfo.avatar"></el-avatar>
       <el-dropdown @command="handleCommand">
@@ -56,6 +56,11 @@ import screenfull from 'screenfull'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   methods: {
+    // 关闭所有tagview标签
+    clearTag() {
+      this.$store.commit('tagsView/clear')
+      this.$router.push('/')
+    },
     // 全屏
     fullScreen() {
       if (screenfull.isEnabled && !screenfull.isFullscreen) {
