@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <Breadcrumb></Breadcrumb>
+    <Breadcrumb class="breadcrumb"></Breadcrumb>
   </el-card>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-card {
-  height: 100%;
+.breadcrumb {
+  margin-bottom: 20px;
 }
 </style>

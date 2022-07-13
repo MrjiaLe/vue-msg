@@ -8,7 +8,10 @@ import './permissions'
 import './styles/reset.scss'
 import { install } from '@/utils/components'
 
+import Fragment from 'vue-fragment'
+
 Vue.use(ElementUI)
+Vue.use(Fragment.Plugin)
 Vue.config.productionTip = false
 install(Vue)
 new Vue({

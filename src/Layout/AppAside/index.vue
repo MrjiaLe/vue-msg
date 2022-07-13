@@ -7,7 +7,7 @@
     active-text-color="#ffd04b"
     router
     :collapse="$store.state.user.collapse"
-    :collapse-transition="false"
+    :collapse-transition="true"
   >
     <menus v-for="item in menuList" :key="item.path" :item="item"></menus>
   </el-menu>
