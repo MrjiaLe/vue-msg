@@ -41,6 +41,7 @@ export default {
 .el-main {
   background-color: $main-bg-color;
   color: #333;
+  overflow: auto;
 }
 
 .el-container {

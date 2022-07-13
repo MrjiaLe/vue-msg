@@ -25,6 +25,17 @@
       </div>
     </div>
     <div class="app-test">
+      <el-tooltip class="item" effect="dark" content="全屏" placement="bottom">
+        <i class="el-icon-rank tooltip" @click="fullScreen"></i>
+      </el-tooltip>
+      <el-tooltip
+        class="el-icon-circle-close"
+        effect="dark"
+        content="关闭全部标签"
+        placement="bottom"
+      >
+        <i class="el-icon-rank tooltip"></i>
+      </el-tooltip>
       <el-avatar :size="40" :src="$store.getters.userInfo.avatar"></el-avatar>
       <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
@@ -41,9 +52,16 @@
 </template>
 
 <script>
+import screenfull from 'screenfull'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   methods: {
+    // 全屏
+    fullScreen() {
+      if (screenfull.isEnabled && !screenfull.isFullscreen) {
+        screenfull.request()
+      }
+    },
     folding() {
       this.$store.commit('user/folding')
     },
@@ -118,6 +136,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tooltip {
+  font-size: 25px;
+  color: white;
+}
 .el-Tagview {
   margin-left: 15px;
 }
@@ -141,7 +163,7 @@ export default {
   align-items: center;
   justify-content: space-around;
   margin-right: 20px;
-  width: 130px;
+  width: 220px;
 }
 .el-dropdown-link {
   color: white;

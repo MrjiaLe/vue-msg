@@ -35,3 +35,62 @@ export default {
   getUserInfo,
   MenuNav
 }
+
+/**
+ * 获取用户列表
+ * @param data
+ * @returns {AxiosPromise}
+ */
+export const userListApi = (data) => {
+  return request({
+    url: '/user/list',
+    data,
+    method: 'GET'
+  })
+}
+/**
+ * 添加用户
+ * @param data
+ * @returns {AxiosPromise}
+ */
+export const addUserApi = (data) => {
+  data.avatar = data.avatar ? data.avatar : 'https://joeschmoe.io/api/v1/random'
+  return request({
+    url: '/user/add',
+    method: 'POST',
+    data
+  })
+}
+/**
+ * 编辑用户
+ * @param data
+ * @returns {AxiosPromise}
+ */
+export const updateUserApi = (data) => {
+  return request({
+    url: '/user/update',
+    method: 'PUT',
+    data
+  })
+}
+/**
+ * 分配角色
+ * @param id
+ * @param data
+ * @returns {AxiosPromise}
+ */
+export const roleApi = (id, data) => {
+  return request({
+    url: `/user/assign/${id}`,
+    method: 'POST',
+    data
+  })
+}
+
+export const userDelApi = (integer) => {
+  return request({
+    url: '/sys/user/del',
+    method: 'POST',
+    data: integer
+  })
+}
