@@ -37,6 +37,16 @@ export default {
 }
 
 /**
+ * 获取用户权限
+ */
+export const setMenuNav = () => {
+  return request({
+    url: '/menu/nav',
+    method: 'GET'
+  })
+}
+
+/**
  * 获取用户列表
  * @param data
  * @returns {AxiosPromise}
@@ -92,5 +102,17 @@ export const userDelApi = (integer) => {
     url: '/sys/user/del',
     method: 'POST',
     data: integer
+  })
+}
+
+/**
+ * 单个用户小心些
+ * @param id
+ * @returns {AxiosPromise}
+ */
+export const userInfoIdAPI = (id) => {
+  return request({
+    url: `/user/userInfo/${id}`,
+    method: 'GET'
   })
 }
